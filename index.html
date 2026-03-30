@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeLa | Resmi Site</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #0a0a1a);
+    color: white;
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.banner {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.profile {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid #00eaff;
+    box-shadow: 0 0 25px #00eaff;
+    object-fit: cover;
+    position: absolute;
+    left: 50%;
+    bottom: -70px;
+    transform: translateX(-50%);
+}
+
+.channel-name {
+    margin-top: 80px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #00eaff;
+}
+
+.channel-desc {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.subscribe-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #FF0000;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.subscribe-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
+.videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px;
+}
+
+.video-card {
+    background: #1a1a2e;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #000;
+}
+
+.video-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 20px #00eaff;
+}
+
+.thumbnail {
+    width: 100%;
+}
+
+.video-title {
+    padding: 12px;
+    font-size: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .channel-name { font-size: 24px; }
+    .profile { width: 100px; height: 100px; bottom: -50px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <img class="banner" 
+         src="https://yt3.googleusercontent.com/e8eJRBc9-wb61o74nsjv81z1nSzHIkQfP_JTf2D_fypAKEQfFSsymCqudDkEFhI7n6-V4Otp5DU=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" 
+         alt="BeLa Kanal Banner">
+    <img class="profile" 
+         src="https://yt3.googleusercontent.com/u2EqYceVUO6ib1_-CM-3lJXXlbKIPB7Mb8mXQuCELQ9oHN_d4A1xCYjtcCEAclunMGXzs8AluA=s500-c-k-c0x00ffffff-no-rj" 
+         alt="BeLa Kanal Fotoğrafı">
+    <div class="channel-name">BeLa</div>
+    <div class="channel-desc">Minecraft • Shorts • Eğlence</div>
+    <a class="subscribe-button" href="https://www.youtube.com/channel/UCMgKiBynka7_51dVpjhcAew?sub_confirmation=1" target="_blank">Abone Ol</a>
+</div>
+
+<div class="videos" id="videoContainer"></div>
+
+<script>
+const videos = [
+  "yMOLWWo3u4U","k_SsNx4HQ_Q","MD3Ce89Kot4","01Y29eq7PtU","4TgjHpDnYBc","ZtUzteegWwA","zhnpu-_ru9E",
+  "hAzdPqLapFM","IVXb50HIybI","KKHPmHaDrx0","Xcx-iVZbz2U","LtL5m77Ldco","SOZREeqZfU4","kPgwQuokCTs",
+  "jrCkO72HALc","_IjNOIVSDT8","hBmKFbjM5YM","RUauzVBDZII","LsvI7uSzxu0","Ximtgjyu42s","-Tsp_msEHZA",
+  "gJKSh3z4zSQ","BA5fnIIzh3U","1sz2fVaHCsk","PSyOt8FCCho","FtFgu0I0J_0","FuqFdq-ExLs","Otj3DC_K4BA",
+  "Y0nPNaV5CvQ","xNB0vYvSa5I","zn9W2moY7fo","ks2E7IGHfx4","bp0YPOrVEIs","qRRJP_egoI8","9eryzwvnsII",
+  "jrtIqvSihqc","KTnlcm7uG0E","N_Qnkh96Tl0","vnyQmBjgO1A","onZETgv2RyY","PAgv2GVU4h0","hFb6HdJ8RGA",
+  "zEOFTbqaen4","X1Sf6hvpjpY","gkRp32SPS2g","6HAY0as5Yek","9tewfxKw39I","q33mtVsvMw4","bIClyJGjKPo",
+  "NfZtXdpbPYI","tIIS0z_zQcU","2fKc-dOICiw","r1SjNrAELpU","3r-YKj8uaus","h9XGUEerxBA","QNlsWxVQLVQ",
+  "B7msxFIHMvc","AyVcxsmQlaM","gztVZx_KR-s","YFLdL4C9W74","74714VD-bIY","uhUM_9FoC38"
+];
+
+const container = document.getElementById("videoContainer");
+
+videos.forEach(id => {
+    fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${id}`)
+    .then(res => res.json())
+    .then(data => {
+        const html = `
+        <a href="https://www.youtube.com/watch?v=${id}" target="_blank">
+            <div class="video-card">
+                <img class="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg" alt="Video Thumbnail">
+                <div class="video-title">${data.title}</div>
+            </div>
+        </a>`;
+        container.innerHTML += html;
+    })
+    .catch(() => {
+        const fallback = `
+        <a href="https://www.youtube.com/watch?v=${id}" target="_blank">
+            <div class="video-card">
+                <img class="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg" alt="Video Thumbnail">
+                <div class="video-title">Başlık Yüklenemedi</div>
+            </div>
+        </a>`;
+        container.innerHTML += fallback;
+    });
+});
+</script>
+
+</body>
+</html>
